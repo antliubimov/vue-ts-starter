@@ -1,5 +1,15 @@
 import {Component, UI} from "@intelinvest/platform/src/app/ui";
 
+interface IEvent {
+    date: string,
+    totalAmount: string,
+    quantity: number,
+    label: string,
+    comment: string,
+    period: number,
+    type: string,
+}
+
 @Component({
     // language=Vue
     template: `
@@ -43,7 +53,7 @@ import {Component, UI} from "@intelinvest/platform/src/app/ui";
 })
 export class EventsPage extends UI {
 
-    private events: any = [];
+    private events: IEvent[] = [];
     private selected: number[] = [];
     private allSelectedAmounts: string = "";
 
