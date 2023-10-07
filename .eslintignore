@@ -1,9 +1,0 @@
-node_modules
-artifacts
-cache
-coverage
-typings/
-typings/typechain/
-typings/typechain/factories/
-./typings/typechain/
-./typings/typechain/factories/
