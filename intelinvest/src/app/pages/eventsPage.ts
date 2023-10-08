@@ -32,7 +32,7 @@ interface IEvent {
                     <tr
                         v-for="(item, index) in events"
                         :key="index"
-                        @click="openEvent(item)"
+                        @click="openEvent(item, index)"
                     >
                       <td>{{ item.date }}</td>
                       <td>{{ item.totalAmount }}</td>
@@ -52,7 +52,6 @@ interface IEvent {
     `
 })
 export class EventsPage extends UI {
-
     private events: IEvent[] = [];
     private selected: number[] = [];
     private allSelectedAmounts: string = "";
@@ -91,8 +90,8 @@ export class EventsPage extends UI {
         this.allSelectedAmounts = Object.entries(typesAmount).map(([key, value]): string => `${key}: ${value}`).join(", ");
     }
 
-    openEvent(event: any): void {
-        const routeData = this.$router.resolve({ path: "event", query: event });
-        window.open(routeData.href, "_blank");
+    openEvent(event: any, id: number): void {
+        const routeData = this.$router.resolve({ path: "event" });
+        window.open(`${routeData.href}/${id}`, "_blank");
     }
 }
