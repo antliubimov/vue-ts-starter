@@ -13,7 +13,6 @@ import {Component, UI} from "@intelinvest/platform/src/app/ui";
               <td>{{value}}</td>
             </tr>
           </table>
-      {{event}}
       </v-container>
     `
 })

@@ -1,12 +1,13 @@
 import {Component, UI} from "@intelinvest/platform/src/app/ui";
+import {Modal} from "../components/Modal";
 
 interface IEvent {
     date: string,
     totalAmount: string,
-    quantity: number,
+    quantity: string,
     label: string,
     comment: string,
-    period: number,
+    period: string,
     type: string,
 }
 
@@ -47,14 +48,20 @@ interface IEvent {
                 </tbody>
               </table>
               <v-btn @click="showSelectedAmount">Показать выбранные</v-btn>
-              <p>{{ allSelectedAmounts }}</p>
+              <Modal
+                  v-show="isModalVisible"
+                  @close="closeModal"
+                  :items="allSelectedAmounts"
+              />
           </v-container>
     `
 })
+
 export class EventsPage extends UI {
     private events: IEvent[] = [];
     private selected: number[] = [];
     private allSelectedAmounts: string = "";
+    private isModalVisible: boolean = false;
 
     async created(): Promise<void> {
         const params = {
@@ -88,10 +95,15 @@ export class EventsPage extends UI {
         }
 
         this.allSelectedAmounts = Object.entries(typesAmount).map(([key, value]): string => `${key}: ${value}`).join(", ");
+        this.isModalVisible = true;
     }
 
     openEvent(event: any, id: number): void {
         const routeData = this.$router.resolve({ path: "event" });
         window.open(`${routeData.href}/${id}`, "_blank");
+    }
+
+    closeModal() {
+        this.isModalVisible = false;
     }
 }
